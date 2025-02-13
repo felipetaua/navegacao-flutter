@@ -19,7 +19,7 @@ class Aplicativo extends StatelessWidget {
       home: Menu(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/tela1': (context) => Tela1(),
+        '/tela1': (context) => Cadastro(pessoas: pessoas),
         '/tela2': (context) => Tela2(),
         '/tela3': (context) => Tela3(),
         '/tela4': (context) => Tela4(),
@@ -49,7 +49,7 @@ class Menu extends StatelessWidget {
                 icone: Icons.person_add,
                 cor: Colors.white),
             botao(
-                texto: 'Tela2',
+                texto: 'Lista',
                 rota: '/tela2',
                 icone: Icons.list_alt,
                 cor: Colors.white),

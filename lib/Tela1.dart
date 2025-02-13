@@ -27,7 +27,11 @@ class Cadastro extends StatefulWidget {
 class _CadastroState extends State<Cadastro> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cadastro de Pessoas'),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
+    );
   }
 }
