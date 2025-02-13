@@ -4,19 +4,20 @@ import 'package:navegacao/Tela2.dart';
 import 'package:navegacao/Tela3.dart';
 import 'package:navegacao/Tela4.dart';
 
-// classe principal inicia o projeto
+//classe principal inicia o projeto
 void main() => runApp(Aplicativo());
 
-// classe pai que configura todo nosso app herda tipo Stateless
-
+//Classe pai que configura todo nosso app herda tipo stateless
 class Aplicativo extends StatelessWidget {
+  final List<Pessoa> pessoas = [];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Menu principal',
+      title: 'Menu Principal',
       theme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
       home: Menu(),
+      debugShowCheckedModeBanner: false,
       routes: {
         '/tela1': (context) => Tela1(),
         '/tela2': (context) => Tela2(),
@@ -32,18 +33,36 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu principal', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Menu Principal',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Center(
         child: GridView.count(
           crossAxisCount: 2,
-          children: [
+          children: <Widget>[
             botao(
-                texto: 'Tela 1',
+                texto: 'Cadastro',
                 rota: '/tela1',
-                icone: Icons.ac_unit,
-                cor: Colors.red),
+                icone: Icons.person_add,
+                cor: Colors.white),
+            botao(
+                texto: 'Tela2',
+                rota: '/tela2',
+                icone: Icons.list_alt,
+                cor: Colors.white),
+            botao(
+                texto: 'Tela3',
+                rota: '/tela3',
+                icone: Icons.phone_iphone_sharp,
+                cor: Colors.white),
+            botao(
+                texto: 'Tela4',
+                rota: '/tela4',
+                icone: Icons.person_2_rounded,
+                cor: Colors.white),
           ],
         ),
       ),
@@ -52,7 +71,7 @@ class Menu extends StatelessWidget {
 }
 
 class botao extends StatelessWidget {
-  // variaveis que configuram um botao novo personalizado
+  //variáveis que configuram um botão novo personalizado
   final String texto;
   final String rota;
   final IconData icone;
@@ -63,15 +82,33 @@ class botao extends StatelessWidget {
       required this.texto,
       required this.rota,
       required this.icone,
-      required this.cor}
-      );
+      required this.cor});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      // espaçamento interno
+      //espaçamento interno
       padding: EdgeInsets.all(8.0),
-      child: Text(texto),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.deepPurpleAccent,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, rota);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icone, color: cor, size: 70),
+            Text(
+              texto,
+              style: TextStyle(color: cor, fontSize: 20.0),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
