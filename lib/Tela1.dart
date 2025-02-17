@@ -67,6 +67,40 @@ class _CadastroState extends State<Cadastro> {
               controller: cidadeControle,
               decoration: InputDecoration(labelText: 'Cidade'),
             ),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // setState atualiza a tela na hora
+                setState(() {
+                  // criando um novo objeto pessoa "Ex: Seu Arlindo"
+                  Pessoa pessoaNova = Pessoa(
+                    nomeControle.text,
+                    emailControle.text,
+                    telefoneControle.text,
+                    enderecoControle.text,
+                    cidadeControle.text,
+                  );
+                  widget.pessoas.add(pessoaNova);
+                  // limpando os campos
+                  nomeControle.clear();
+                  emailControle.clear();
+                  telefoneControle.clear();
+                  enderecoControle.clear();
+                  cidadeControle.clear();
+                  AlertDialog(title: "Cadastrado com sucesso!");
+                });
+              },
+              // adicionando pessoa na lista "Ex: Seu Arlindo"
+              child: Text("Salvar"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurpleAccent,
+                foregroundColor: Colors.white,
+                shadowColor: Colors.black,
+              ),
+            ),
+            ListTile(title: Text()),
           ],
         ),
       ),
