@@ -89,7 +89,6 @@ class _CadastroState extends State<Cadastro> {
                   telefoneControle.clear();
                   enderecoControle.clear();
                   cidadeControle.clear();
-                  AlertDialog(title: "Cadastrado com sucesso!");
                 });
               },
               // adicionando pessoa na lista "Ex: Seu Arlindo"
@@ -100,7 +99,6 @@ class _CadastroState extends State<Cadastro> {
                 shadowColor: Colors.black,
               ),
             ),
-            ListTile(title: Text()),
           ],
         ),
       ),

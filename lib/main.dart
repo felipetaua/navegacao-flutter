@@ -19,8 +19,10 @@ class Aplicativo extends StatelessWidget {
       home: Menu(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/tela1': (context) => Cadastro(pessoas: pessoas),// faz referencia a tela1
-        '/tela2': (context) => Tela2(),
+        '/tela1': (context) =>
+            Cadastro(pessoas: pessoas), // faz referencia a tela1
+        '/tela2': (context) =>
+            Tabela(pessoas: pessoas), // faz referencia a tela2
         '/tela3': (context) => Tela3(),
         '/tela4': (context) => Tela4(),
       },
