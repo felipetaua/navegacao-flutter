@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class Tabela extends StatelessWidget {
   final List<Pessoa> pessoas;
+
+  void abrirWhats(String telefone) async {
+    final url = "https://wa.me/$telefone";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Não foi possível abrir $url';
+    }
+  }
 
   Tabela({required this.pessoas});
 
@@ -16,7 +27,25 @@ class Tabela extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Text("Lista aqui"),
+        child: ListView.builder(
+            itemCount: pessoas.length, // Quandidade de itens da lista
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(Icons.person),
+                title: Text(pessoas[index].nome),
+                subtitle: Text(
+                  "Email: " +
+                      pessoas[index].email +
+                      "\nTel: " +
+                      pessoas[index].telefone +
+                      "\nEndereço: " +
+                      pessoas[index].endereco +
+                      "\nCidade: " +
+                      pessoas[index].cidade,
+                ),
+                trailing: Icon(Icons.message),
+              );
+            }),
       ),
     );
   }
