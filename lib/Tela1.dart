@@ -36,7 +36,7 @@ class _CadastroState extends State<Cadastro> {
   // Criando método de cadastro
   Future<void> cadastrarPessoa() async {
     final url = Uri.parse("link do banco de dados");
-    final resposta = await http.post(url, body);
+    final resposta = await http.post(url, body:"");
   }
 
   @override
