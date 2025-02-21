@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // criando a classe Pessoa - fabricar pessoas
 class Pessoa {
@@ -31,6 +32,12 @@ class _CadastroState extends State<Cadastro> {
   final telefoneControle = TextEditingController();
   final enderecoControle = TextEditingController();
   final cidadeControle = TextEditingController();
+
+  // Criando método de cadastro
+  Future<void> cadastrarPessoa() async {
+    final url = Uri.parse("link do banco de dados");
+    final resposta = await http.post(url, body);
+  }
 
   @override
   Widget build(BuildContext context) {
