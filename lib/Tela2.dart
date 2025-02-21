@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class Tabela extends StatelessWidget {
   final List<Pessoa> pessoas;
 
-  void abrirWhats(String telefone) async {
-    final url = "https://wa.me/$telefone";
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Não foi possível abrir $url';
+  Future<void> abrirWhats(String telefone) async {
+    final url = Uri.parse("https://wa.me/$telefone");
+    if (!await launchUrl(url)) {
+      throw Exception('Não pode iniciar $url');
     }
   }
 
@@ -43,7 +40,10 @@ class Tabela extends StatelessWidget {
                       "\nCidade: " +
                       pessoas[index].cidade,
                 ),
-                trailing: Icon(Icons.message),
+                trailing: IconButton(
+                  onPressed: () => abrirWhats(pessoas[index].telefone),
+                  icon: Icon(Icons.message),
+                ),
               );
             }),
       ),
