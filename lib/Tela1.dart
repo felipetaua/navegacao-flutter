@@ -35,11 +35,17 @@ class _CadastroState extends State<Cadastro> {
   final cidadeControle = TextEditingController();
 
   // Criando método de cadastro
-  Future<void> cadastrarPessoa() async {
+  Future<void> cadastrarPessoa(Pessoa pessoa) async {
     final url = Uri.parse(
         "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
-    final resposta =
-        await http.post(url, body: jsonEncode({'nome': 'Cleiton'}));
+    final resposta = await http.post(url,
+        body: jsonEncode({
+          "nome": pessoa.nome,
+          "email": pessoa.email,
+          "telefone": pessoa.telefone,
+          "endereco": pessoa.endereco,
+          "cidade": pessoa.cidade
+        }));
   }
 
   @override
@@ -92,8 +98,8 @@ class _CadastroState extends State<Cadastro> {
                     enderecoControle.text,
                     cidadeControle.text,
                   );
-                  widget.pessoas.add(pessoaNova);
-                  cadastrarPessoa();
+                  // widget.pessoas.add(pessoaNova);
+                  cadastrarPessoa(pessoaNova);
                   // limpando os campos
                   nomeControle.clear();
                   emailControle.clear();

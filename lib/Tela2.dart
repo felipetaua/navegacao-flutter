@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 class Tabela extends StatelessWidget {
   final List<Pessoa> pessoas;
 
+  
+
   Future<void> abrirWhats(String telefone) async {
     final url = Uri.parse("https://wa.me/$telefone");
     if (!await launchUrl(url)) {
