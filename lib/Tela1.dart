@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,8 +36,10 @@ class _CadastroState extends State<Cadastro> {
 
   // Criando método de cadastro
   Future<void> cadastrarPessoa() async {
-    final url = Uri.parse("link do banco de dados");
-    final resposta = await http.post(url, body:"");
+    final url = Uri.parse(
+        "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
+    final resposta =
+        await http.post(url, body: jsonEncode({'nome': 'Cleiton'}));
   }
 
   @override
@@ -90,6 +93,7 @@ class _CadastroState extends State<Cadastro> {
                     cidadeControle.text,
                   );
                   widget.pessoas.add(pessoaNova);
+                  cadastrarPessoa();
                   // limpando os campos
                   nomeControle.clear();
                   emailControle.clear();
