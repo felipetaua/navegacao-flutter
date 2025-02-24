@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
-class Tabela extends StatelessWidget {
-  final List<Pessoa> pessoas;
+class TabelaPai extends StatefulWidget {
+  @override
+  Tabela createState() => Tabela();
+}
 
-  
+class Tabela extends State<TabelaPai> {
+  final List<Pessoa> pessoas = [];
+
+  Future<void> buscarPessoas() async {
+    final url = Uri.parse(
+        "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
+    final resposta = await http.get(url);
+    print(resposta);
+  }
 
   Future<void> abrirWhats(String telefone) async {
     final url = Uri.parse("https://wa.me/$telefone");
@@ -14,7 +25,7 @@ class Tabela extends StatelessWidget {
     }
   }
 
-  Tabela({required this.pessoas});
+  //Tabela({required this.pessoas});
 
   @override
   Widget build(BuildContext context) {
