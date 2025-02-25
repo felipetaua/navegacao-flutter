@@ -31,6 +31,7 @@ class Tabela extends State<TabelaPai> {
         //aqui atualizar a lista e adicionar a pessoa por vês
         setState(() {
           Pessoa pessoaNova = Pessoa(
+              id,
               dadosPessoa["nome"] ?? '',
               dadosPessoa["email"] ?? '',
               dadosPessoa["telefone"] ?? '',
@@ -77,9 +78,18 @@ class Tabela extends State<TabelaPai> {
                       "\nCidade: " +
                       pessoas[index].cidade,
                 ),
-                trailing: IconButton(
-                  onPressed: () => abrirWhats(pessoas[index].telefone),
-                  icon: Icon(Icons.message),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: () => abrirWhats(pessoas[index].telefone),
+                      icon: Icon(Icons.message),
+                    ),
+                    IconButton(
+                      onPressed: () => abrirWhats(pessoas[index].telefone),
+                      icon: Icon(Icons.restore_from_trash_rounded),
+                    ),
+                  ],
                 ),
               );
             }),
