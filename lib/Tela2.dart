@@ -22,8 +22,24 @@ class Tabela extends State<TabelaPai> {
     final url = Uri.parse(
         "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
     final resposta = await http.get(url);
+    // decodificando o arquivo json que recebemos
     final Map<String, dynamic>? dados = jsonDecode(resposta.body);
-    print(dados);
+    // se os dados da lista não forem nulos
+    if (dados != null) {
+      // forEach é o loop de repetição que lista um a um
+      dados.forEach((id, dadosPessoa) {
+        //aqui atualizar a lista e adicionar a pessoa por vês
+        setState(() {
+          Pessoa pessoaNova = Pessoa(
+              dadosPessoa["nome"] ?? '',
+              dadosPessoa["email"] ?? '',
+              dadosPessoa["telefone"] ?? '',
+              dadosPessoa["endereco"] ?? '',
+              dadosPessoa["cidade"] ?? '');
+          pessoas.add(pessoaNova);
+        });
+      });
+    }
   }
 
   Future<void> abrirWhats(String telefone) async {
