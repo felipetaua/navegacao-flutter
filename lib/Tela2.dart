@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class TabelaPai extends StatefulWidget {
   @override
@@ -11,11 +12,18 @@ class TabelaPai extends StatefulWidget {
 class Tabela extends State<TabelaPai> {
   final List<Pessoa> pessoas = [];
 
+  @override
+  void initState() {
+    super.initState();
+    buscarPessoas();
+  }
+
   Future<void> buscarPessoas() async {
     final url = Uri.parse(
         "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
     final resposta = await http.get(url);
-    print(resposta);
+    final Map<String, dynamic>? dados = jsonDecode(resposta.body);
+    print(dados);
   }
 
   Future<void> abrirWhats(String telefone) async {
