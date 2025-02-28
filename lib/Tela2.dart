@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
+import 'package:navegacao/detalhes.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -81,29 +82,31 @@ class Tabela extends State<TabelaPai> {
               return ListTile(
                 leading: Icon(Icons.person),
                 title: Text(pessoas[index].nome),
-                subtitle: Text(
-                  "Email: " +
-                      pessoas[index].email +
-                      "\nTel: " +
-                      pessoas[index].telefone +
-                      "\nEndereço: " +
-                      pessoas[index].endereco +
-                      "\nCidade: " +
-                      pessoas[index].cidade,
-                ),
+                subtitle: Text("Email: " + pessoas[index].email),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
                       onPressed: () => abrirWhats(pessoas[index].telefone),
                       icon: Icon(Icons.message),
+                      color: Colors.green[300],
                     ),
                     IconButton(
                       onPressed: () => excluir(pessoas[index].id),
                       icon: Icon(Icons.restore_from_trash_rounded),
+                      color: Colors.red[300],
                     ),
                   ],
                 ),
+                // quando clicar no item da lista (onTap)
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Detalhes(
+                                pessoa: pessoas[index],
+                              )));
+                },
               );
             }),
       ),
