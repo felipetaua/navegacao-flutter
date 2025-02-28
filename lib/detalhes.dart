@@ -20,6 +20,36 @@ class Detalhes extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.person_2_rounded,
+                size: 100,
+              ),
+              SizedBox(height: 20),
+              Text(
+                pessoa.nome,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Email: ${pessoa.email}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Telefone: ${pessoa.telefone}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "endereço: ${pessoa.endereco}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Cidade: ${pessoa.cidade}",
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
           ),
         ),
       ),
