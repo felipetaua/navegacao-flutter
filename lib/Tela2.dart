@@ -18,6 +18,19 @@ class Tabela extends State<TabelaPai> {
     buscarPessoas();
   }
 
+  // método de exclusão de pessoas
+  Future<void> excluir(String id) async {
+    final url = Uri.parse(
+        "https://finan-4854e-default-rtdb.firebaseio.com/pessoa/$id.json");
+    final resposta = await http.delete(url);
+    if (resposta.statusCode == 200) {
+      setState(() {
+        pessoas.removeWhere((element) => element.id == id);
+      });
+    }
+  }
+
+  // método para buscar todos os clientes do banco
   Future<void> buscarPessoas() async {
     final url = Uri.parse(
         "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
@@ -86,7 +99,7 @@ class Tabela extends State<TabelaPai> {
                       icon: Icon(Icons.message),
                     ),
                     IconButton(
-                      onPressed: () => abrirWhats(pessoas[index].telefone),
+                      onPressed: () => excluir(pessoas[index].id),
                       icon: Icon(Icons.restore_from_trash_rounded),
                     ),
                   ],

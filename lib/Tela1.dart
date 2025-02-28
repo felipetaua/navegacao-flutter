@@ -110,6 +110,7 @@ class _CadastroState extends State<Cadastro> {
                   enderecoControle.clear();
                   cidadeControle.clear();
                 });
+                
               },
               // adicionando pessoa na lista "Ex: Seu Arlindo"
               child: Text("Salvar"),
