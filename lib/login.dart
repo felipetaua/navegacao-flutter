@@ -23,7 +23,7 @@ class Login extends StatefulWidget {
 class LoginEstado extends State<Login> {
   final emailControle = TextEditingController();
   final senhaControle = TextEditingController();
-  bool estaCarregado = false;
+  bool estaCarregando = false;
   String mensagemErro = '';
   bool ocultado = true;
 
@@ -76,7 +76,11 @@ class LoginEstado extends State<Login> {
                     icon: Icon(
                         ocultado ? Icons.visibility : Icons.visibility_off),
                   )),
-            )
+            ),
+            SizedBox(height: 16,),
+            estaCarregando ? CircularProgressIndicator() : ElevatedButton(onPressed: () {
+              
+            },)
           ],
         ),
       ),
