@@ -25,6 +25,7 @@ class LoginEstado extends State<Login> {
   final senhaControle = TextEditingController();
   bool estaCarregado = false;
   String mensagemErro = '';
+  bool ocultado = true;
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +60,22 @@ class LoginEstado extends State<Login> {
               height: 16,
             ),
             TextField(
-              controller: emailControle,
+              controller: senhaControle,
+              obscureText: ocultado,
               decoration: InputDecoration(
-                labelText: 'Senha',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock_outline_rounded),
-                prefixIconColor: Colors.grey,
-              ),
+                  labelText: 'Senha',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.lock_outline_rounded),
+                  prefixIconColor: Colors.grey,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        ocultado = !ocultado;
+                      });
+                    },
+                    icon: Icon(
+                        ocultado ? Icons.visibility : Icons.visibility_off),
+                  )),
             )
           ],
         ),
