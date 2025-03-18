@@ -21,9 +21,32 @@ class Login extends StatefulWidget {
 }
 
 class LoginEstado extends State<Login> {
-  @override
+  final emailControle = TextEditingController();
+  final senhaControle = TextEditingController();
+  bool estaCarregado = false;
+  String mensagemErro = '';
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Tela de Login'),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          
+          children: [
+            Icon(
+              Icons.account_circle_sharp,
+              size: 100,
+              color: Colors.deepPurple,
+            )
+          ],
+        ),
+      ),
+    );
   }
-  }
+}
