@@ -24,6 +24,7 @@ class Tabela extends State<TabelaPai> {
     final url = Uri.parse(
         "https://finan-4854e-default-rtdb.firebaseio.com/empresa/$id.json");
     final resposta = await http.delete(url);
+    print('Resposta de exclusão: ${resposta.statusCode}');
     if (resposta.statusCode == 200) {
       setState(() {
         empresas.removeWhere((element) => element.id == id);
@@ -36,8 +37,10 @@ class Tabela extends State<TabelaPai> {
     final url = Uri.parse(
         "https://finan-4854e-default-rtdb.firebaseio.com/empresa.json");
     final resposta = await http.get(url);
+    print('Resposta de busca: ${resposta.statusCode}');
     // decodificando o arquivo json que recebemos
     final Map<String, dynamic>? dados = jsonDecode(resposta.body);
+    print('Dados recebidos: $dados');
     // se os dados da lista não forem nulos
     if (dados != null) {
       // forEach é o loop de repetição que lista um a um
@@ -48,10 +51,12 @@ class Tabela extends State<TabelaPai> {
               id,
               dadosEmpresa["nome"] ?? '',
               dadosEmpresa["email"] ?? '',
+              dadosEmpresa["cnpj"] ?? '',
               dadosEmpresa["telefone"] ?? '',
               dadosEmpresa["endereco"] ?? '',
               dadosEmpresa["cidade"] ?? '',
-              dadosEmpresa["vaga"] ?? '');
+              dadosEmpresa["vaga"] ?? '',
+              dadosEmpresa["qtdFunc"] ?? '');
           empresas.add(empresaNova);
         });
       });

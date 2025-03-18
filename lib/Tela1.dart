@@ -50,9 +50,12 @@ class _CadastroState extends State<Cadastro> {
         body: jsonEncode({
           "nome": Empresa.nome,
           "email": Empresa.email,
+          "cnpj": Empresa.cnpj,
           "telefone": Empresa.telefone,
           "endereco": Empresa.endereco,
-          "cidade": Empresa.cidade
+          "cidade": Empresa.cidade,
+          "vagas": Empresa.vaga,
+          "qtdFunc": Empresa.cidade
         }));
   }
 
