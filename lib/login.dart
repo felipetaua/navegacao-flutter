@@ -80,7 +80,7 @@ class LoginEstado extends State<Login> {
             SizedBox(height: 16,),
             estaCarregando ? CircularProgressIndicator() : ElevatedButton(onPressed: () {
               
-            },)
+            }, child: Text('Cadastrar'),)
           ],
         ),
       ),
