@@ -9,7 +9,7 @@ void main() => runApp(Aplicativo());
 
 //Classe pai que configura todo nosso app herda tipo stateless
 class Aplicativo extends StatelessWidget {
-  final List<Pessoa> pessoas = [];
+  final List<Empresa> Empresas = [];
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class Aplicativo extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/tela1': (context) =>
-            Cadastro(pessoas: pessoas), // faz referencia a tela1
-        '/tela2': (context) => TabelaPai(),
+            Cadastro(Empresas: Empresas), // faz referencia a tela1
+        // '/tela2': (context) => TabelaPai(),
         '/tela3': (context) => Tela3(),
         '/tela4': (context) => Tela4(),
       },

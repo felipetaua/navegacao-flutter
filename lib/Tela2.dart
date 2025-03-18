@@ -11,47 +11,48 @@ class TabelaPai extends StatefulWidget {
 }
 
 class Tabela extends State<TabelaPai> {
-  final List<Pessoa> pessoas = [];
+  final List<Empresa> empresas = [];
 
   @override
   void initState() {
     super.initState();
-    buscarPessoas();
+    buscarEmpresas();
   }
 
-  // método de exclusão de pessoas
+  // método de exclusão de empresas
   Future<void> excluir(String id) async {
     final url = Uri.parse(
-        "https://finan-4854e-default-rtdb.firebaseio.com/pessoa/$id.json");
+        "https://finan-4854e-default-rtdb.firebaseio.com/empresa/$id.json");
     final resposta = await http.delete(url);
     if (resposta.statusCode == 200) {
       setState(() {
-        pessoas.removeWhere((element) => element.id == id);
+        empresas.removeWhere((element) => element.id == id);
       });
     }
   }
 
   // método para buscar todos os clientes do banco
-  Future<void> buscarPessoas() async {
+  Future<void> buscarEmpresas() async {
     final url = Uri.parse(
-        "https://finan-4854e-default-rtdb.firebaseio.com/pessoa.json");
+        "https://finan-4854e-default-rtdb.firebaseio.com/empresa.json");
     final resposta = await http.get(url);
     // decodificando o arquivo json que recebemos
     final Map<String, dynamic>? dados = jsonDecode(resposta.body);
     // se os dados da lista não forem nulos
     if (dados != null) {
       // forEach é o loop de repetição que lista um a um
-      dados.forEach((id, dadosPessoa) {
-        //aqui atualizar a lista e adicionar a pessoa por vês
+      dados.forEach((id, dadosEmpresa) {
+        //aqui atualizar a lista e adicionar a empresa por vês
         setState(() {
-          Pessoa pessoaNova = Pessoa(
+          Empresa empresaNova = Empresa(
               id,
-              dadosPessoa["nome"] ?? '',
-              dadosPessoa["email"] ?? '',
-              dadosPessoa["telefone"] ?? '',
-              dadosPessoa["endereco"] ?? '',
-              dadosPessoa["cidade"] ?? '');
-          pessoas.add(pessoaNova);
+              dadosEmpresa["nome"] ?? '',
+              dadosEmpresa["email"] ?? '',
+              dadosEmpresa["telefone"] ?? '',
+              dadosEmpresa["endereco"] ?? '',
+              dadosEmpresa["cidade"] ?? '',
+              dadosEmpresa["vaga"] ?? '');
+          empresas.add(empresaNova);
         });
       });
     }
@@ -64,7 +65,7 @@ class Tabela extends State<TabelaPai> {
     }
   }
 
-  //Tabela({required this.pessoas});
+  //Tabela({required this.empresas});
 
   @override
   Widget build(BuildContext context) {
@@ -77,22 +78,22 @@ class Tabela extends State<TabelaPai> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: ListView.builder(
-            itemCount: pessoas.length, // Quandidade de itens da lista
+            itemCount: empresas.length, // Quandidade de itens da lista
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Icon(Icons.person),
-                title: Text(pessoas[index].nome),
-                subtitle: Text("Email: " + pessoas[index].email),
+                title: Text(empresas[index].nome),
+                subtitle: Text("Email: " + empresas[index].email),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      onPressed: () => abrirWhats(pessoas[index].telefone),
+                      onPressed: () => abrirWhats(empresas[index].telefone),
                       icon: Icon(Icons.message),
                       color: Colors.green[300],
                     ),
                     IconButton(
-                      onPressed: () => excluir(pessoas[index].id),
+                      onPressed: () => excluir(empresas[index].id),
                       icon: Icon(Icons.restore_from_trash_rounded),
                       color: Colors.red[300],
                     ),
@@ -104,7 +105,7 @@ class Tabela extends State<TabelaPai> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Detalhes(
-                                pessoa: pessoas[index],
+                                empresa: empresas[index],
                               )));
                 },
               );
