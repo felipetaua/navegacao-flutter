@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -113,6 +115,27 @@ class CadastroEstado extends State<Cadastro> {
   bool estaCarregando = false;
   bool ocultado = true;
 
+  Future<void> cadastrar() async {
+    setState(() {
+      estaCarregando = true;
+    });
+
+    final nome = nomeControle.text;
+    final email = emailControle.text;
+    final senha = senhaControle.text;
+
+    final url = Uri.parse('https://finan-4854e-default-rtdb.firebaseio.com/usuario.json');
+    final resposta = await http.post(
+      url,
+      body: jsonEncode({
+      'nome': nome, 
+      'email': email, 
+      'senha': senha}
+      ),
+      headers: {'Content-Type': 'aplication/json'},
+    );
+  }
+
   String erro = '';
   @override
   Widget build(BuildContext context) {
@@ -183,7 +206,7 @@ class CadastroEstado extends State<Cadastro> {
             estaCarregando
                 ? CircularProgressIndicator()
                 : ElevatedButton(
-                    onPressed: null,
+                    onPressed: cadastrar,
                     child: Text('Cadastrar'),
                   ),
             erro.isNotEmpty
