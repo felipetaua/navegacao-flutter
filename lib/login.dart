@@ -9,7 +9,7 @@ class Preconfiguracao extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
+      theme: ThemeData.dark(),
       home: Login(),
     );
   }
@@ -31,8 +31,9 @@ class LoginEstado extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Tela de Login'),
-          backgroundColor: Colors.deepPurpleAccent),
+        title: Text('Tela de Login'),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
       body: Padding(
         padding: EdgeInsets.all(50.0),
         child: Column(
@@ -51,7 +52,7 @@ class LoginEstado extends State<Login> {
               decoration: InputDecoration(
                 labelText: 'E-mail',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email),
+                prefixIcon: Icon(Icons.email_rounded),
                 prefixIconColor: Colors.grey,
               ),
             ),
@@ -64,7 +65,7 @@ class LoginEstado extends State<Login> {
               decoration: InputDecoration(
                 labelText: 'Senha',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(Icons.lock_rounded),
                 prefixIconColor: Colors.grey,
                 suffixIcon: IconButton(
                   icon:
@@ -106,11 +107,80 @@ class Cadastro extends StatefulWidget {
 }
 
 class CadastroEstado extends State<Cadastro> {
+  final nomeControle = TextEditingController();
+  final emailControle = TextEditingController();
+  final senhaControle = TextEditingController();
+  bool estaCarregando = false;
+  bool ocultado = true;
+
+  String erro = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cadastro de novo usuário'),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Icon(
+              Icons.perm_contact_calendar,
+              size: 100,
+              color: Colors.deepPurpleAccent,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: nomeControle,
+              decoration: InputDecoration(
+                labelText: 'Seu nome',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person_2_rounded),
+                prefixIconColor: Colors.grey,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: emailControle,
+              decoration: InputDecoration(
+                labelText: 'E-mail',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.email_rounded),
+                prefixIconColor: Colors.grey,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: senhaControle,
+              obscureText: ocultado,
+              decoration: InputDecoration(
+                labelText: 'Senha',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock_rounded),
+                prefixIconColor: Colors.grey,
+                suffixIcon: IconButton(
+                  icon:
+                      Icon(ocultado ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      ocultado = !ocultado;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+          ],
+        ),
       ),
     );
   }
