@@ -122,8 +122,9 @@ class CadastroEstado extends State<Cadastro> {
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(50.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.perm_contact_calendar,
@@ -179,6 +180,15 @@ class CadastroEstado extends State<Cadastro> {
             SizedBox(
               height: 30,
             ),
+            estaCarregando
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: null,
+                    child: Text('Cadastrar'),
+                  ),
+            erro.isNotEmpty
+                ? Text(erro, style: TextStyle(color: Colors.red))
+                : SizedBox(),
           ],
         ),
       ),
