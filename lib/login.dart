@@ -9,7 +9,7 @@ class Preconfiguracao extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: ThemeData.light(),
       home: Login(),
     );
   }
@@ -23,7 +23,7 @@ class Login extends StatefulWidget {
 class LoginEstado extends State<Login> {
   final emailControle = TextEditingController();
   final senhaControle = TextEditingController();
-  bool estaCarregando = false;
+  bool estaCarregado = false;
   String mensagemErro = '';
   bool ocultado = true;
 
@@ -31,58 +31,86 @@ class LoginEstado extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tela de Login'),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
+          title: Text('Tela de Login'),
+          backgroundColor: Colors.deepPurpleAccent),
       body: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(50.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.account_circle_sharp,
+              Icons.person_pin,
               size: 100,
-              color: Colors.deepPurple,
+              color: Colors.deepPurpleAccent,
             ),
             SizedBox(
-              height: 32,
+              height: 20,
             ),
             TextField(
               controller: emailControle,
               decoration: InputDecoration(
                 labelText: 'E-mail',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.email_outlined),
+                prefixIcon: Icon(Icons.email),
                 prefixIconColor: Colors.grey,
               ),
             ),
             SizedBox(
-              height: 16,
+              height: 20,
             ),
             TextField(
               controller: senhaControle,
               obscureText: ocultado,
               decoration: InputDecoration(
-                  labelText: 'Senha',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock_outline_rounded),
-                  prefixIconColor: Colors.grey,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        ocultado = !ocultado;
-                      });
-                    },
-                    icon: Icon(
-                        ocultado ? Icons.visibility : Icons.visibility_off),
-                  )),
+                labelText: 'Senha',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock),
+                prefixIconColor: Colors.grey,
+                suffixIcon: IconButton(
+                  icon:
+                      Icon(ocultado ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      ocultado = !ocultado;
+                    });
+                  },
+                ),
+              ),
             ),
-            SizedBox(height: 16,),
-            estaCarregando ? CircularProgressIndicator() : ElevatedButton(onPressed: () {
-              
-            }, child: Text('Cadastrar'),)
+            SizedBox(
+              height: 30,
+            ),
+            estaCarregado
+                ? CircularProgressIndicator()
+                : ElevatedButton(onPressed: null, child: Text('Entrar')),
+            SizedBox(
+              height: 30,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Cadastro()));
+              },
+              child: Text('Não tem uma conta? Cadastre-se'),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Cadastro extends StatefulWidget {
+  @override
+  CadastroEstado createState() => CadastroEstado();
+}
+
+class CadastroEstado extends State<Cadastro> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cadastro de novo usuário'),
       ),
     );
   }
