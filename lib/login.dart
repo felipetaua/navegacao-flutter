@@ -124,16 +124,21 @@ class CadastroEstado extends State<Cadastro> {
     final email = emailControle.text;
     final senha = senhaControle.text;
 
-    final url = Uri.parse('https://finan-4854e-default-rtdb.firebaseio.com/usuario.json');
+    final url = Uri.parse(
+        'https://finan-4854e-default-rtdb.firebaseio.com/usuario.json');
     final resposta = await http.post(
       url,
-      body: jsonEncode({
-      'nome': nome, 
-      'email': email, 
-      'senha': senha}
-      ),
+      body: jsonEncode({'nome': nome, 'email': email, 'senha': senha}),
       headers: {'Content-Type': 'aplication/json'},
     );
+    if (resposta.statusCode == 200) {
+      Navigator.pop(context);
+    } else {
+      erro = "Erro ao cadastrar usuário";
+    }
+    setState(() {
+      estaCarregando = false;
+    });
   }
 
   String erro = '';
