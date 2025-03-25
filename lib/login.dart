@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:navegacao/main.dart';
 
 void main() {
   runApp(Preconfiguracao());
@@ -28,6 +29,44 @@ class LoginEstado extends State<Login> {
   bool estaCarregado = false;
   String mensagemErro = '';
   bool ocultado = true;
+
+  Future<void> logar() async {
+    // inicia animação de carregamento
+    setState(() {
+      estaCarregado = true;
+      mensagemErro = '';
+    });
+
+    final url = Uri.parse(
+        'https://finan-4854e-default-rtdb.firebaseio.com/usuario.json');
+    final resposta = await http.get(url);
+    // se tudo estiver certo
+    if (resposta.statusCode == 200) {
+      final Map<String, dynamic>? dados = jsonDecode(resposta.body);
+
+      if (dados != null) {
+        bool usuarioValido = false;
+        String nomeUsuario = '';
+
+        dados.forEach((key, valor) {
+          if (valor['email'] == emailControle.text &&
+              valor['senha'] == senhaControle.text) {
+            usuarioValido = true;
+            nomeUsuario = valor['nome'];
+          }
+        });
+        // se o usuario for válido, ou seja, esta no banco, pode ter acesso.
+        if (usuarioValido == true) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Aplicativo()));
+        }
+      }
+    } else {
+      setState(() {
+        mensagemErro = 'Erro de conexão';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +124,7 @@ class LoginEstado extends State<Login> {
             ),
             estaCarregado
                 ? CircularProgressIndicator()
-                : ElevatedButton(onPressed: null, child: Text('Entrar')),
+                : ElevatedButton(onPressed: logar, child: Text('Entrar')),
             SizedBox(
               height: 30,
             ),
@@ -146,7 +185,7 @@ class CadastroEstado extends State<Cadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro de novo usuário'),
+        title: Text('Crie sua Conta'),
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Padding(

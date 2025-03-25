@@ -3,6 +3,7 @@ import 'package:navegacao/Tela1.dart';
 // import 'package:navegacao/Tela2.dart';
 import 'package:navegacao/Tela3.dart';
 import 'package:navegacao/Tela4.dart';
+import 'package:navegacao/detalhes.dart';
 
 //classe principal inicia o projeto
 void main() => runApp(Aplicativo());
