@@ -58,7 +58,12 @@ class LoginEstado extends State<Login> {
         // se o usuario for válido, ou seja, esta no banco, pode ter acesso.
         if (usuarioValido == true) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Aplicativo()));
+              context, MaterialPageRoute(builder: (context) => Aplicativo(nomeUsuario:nomeUsuario)));
+        } else {
+          setState(() {
+            mensagemErro = "Email ou senha inválidos";
+            estaCarregado = false;
+          });
         }
       }
     } else {
@@ -135,6 +140,12 @@ class LoginEstado extends State<Login> {
               },
               child: Text('Não tem uma conta? Cadastre-se'),
             ),
+            mensagemErro.isNotEmpty
+                ? Text(
+                    mensagemErro,
+                    style: TextStyle(color: Colors.red),
+                  )
+                : SizedBox(),
           ],
         ),
       ),

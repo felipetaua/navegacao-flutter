@@ -5,17 +5,16 @@ import 'package:navegacao/Tela3.dart';
 import 'package:navegacao/Tela4.dart';
 import 'package:navegacao/detalhes.dart';
 
-//classe principal inicia o projeto
-void main() => runApp(Aplicativo());
-
 //Classe pai que configura todo nosso app herda tipo stateless
 class Aplicativo extends StatelessWidget {
   final List<Empresa> Empresas = [];
+  final String nomeUsuario;
+  Aplicativo({required this.nomeUsuario});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Menu Principal',
+      title: 'Projeto Integrador',
       theme: ThemeData.dark(),
       home: Menu(),
       debugShowCheckedModeBanner: false,
