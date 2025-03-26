@@ -58,7 +58,9 @@ class LoginEstado extends State<Login> {
         // se o usuario for válido, ou seja, esta no banco, pode ter acesso.
         if (usuarioValido == true) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Aplicativo(nomeUsuario:nomeUsuario)));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Aplicativo(nomeUsuario: nomeUsuario)));
         } else {
           setState(() {
             mensagemErro = "Email ou senha inválidos";
@@ -85,10 +87,17 @@ class LoginEstado extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.person_pin,
-              size: 100,
-              color: Colors.deepPurpleAccent,
+            FadeInImage(
+              placeholder: AssetImage('assets/icon/icone.png'),
+              image: AssetImage('assets/icon/app_icon.png'),
+              fadeInDuration: Duration(seconds: 3),
+              fadeOutDuration: Duration(seconds: 9),
+              width: 250,
+            ),
+            Image.asset(
+              'assets/icon/icone.png',
+              width: 250,
+              height: 250,
             ),
             SizedBox(
               height: 20,
