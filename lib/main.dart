@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navegacao/Tela1.dart';
-// import 'package:navegacao/Tela2.dart';
-import 'package:navegacao/Tela3.dart';
-import 'package:navegacao/Tela4.dart';
+import 'package:navegacao/Tela2.dart';
+import 'package:navegacao/Tela2.dart';
 import 'package:navegacao/detalhes.dart';
 import 'package:navegacao/postagem.dart';
 
@@ -21,12 +20,23 @@ class Aplicativo extends StatelessWidget {
       home: Menu(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/tela1': (context) =>
-            Cadastro(Empresas: Empresas), // faz referencia a tela1
-        '/tela2': (context) =>
-            CadastrarPublicacao(publicacoes: Publicacoes), // Corrigido aqui
-        '/tela3': (context) => Tela3(),
-        '/tela4': (context) => Tela4(),
+        '/tela1': (context) => Cadastro(Empresas: Empresas),
+        '/tela2': (context) => TabelaPai(),
+        '/tela3': (context) => CadastrarPublicacao(publicacoes: Publicacoes),
+        '/tela4': (context) => Empresas.isNotEmpty
+            ? Detalhes(empresa: Empresas.first)
+            : Scaffold(
+                appBar: AppBar(
+                  title: Text('Erro'),
+                  backgroundColor: Colors.red,
+                ),
+                body: Center(
+                  child: Text(
+                    'Nenhuma empresa disponível para exibir.',
+                    style: TextStyle(fontSize: 18, color: Colors.red),
+                  ),
+                ),
+              ),
       },
     );
   }
@@ -53,18 +63,18 @@ class Menu extends StatelessWidget {
                 icone: Icons.person_add,
                 cor: Colors.white),
             botao(
-                texto: 'Lista',
+                texto: 'Listar',
                 rota: '/tela2',
-                icone: Icons.list_alt,
+                icone: Icons.list,
                 cor: Colors.white),
             botao(
-                texto: 'Tela3',
+                texto: 'Criar Post',
                 rota: '/tela3',
-                icone: Icons.phone_iphone_sharp,
+                icone: Icons.add,
                 cor: Colors.white),
             botao(
                 texto: 'Tela4',
-                rota: '/tela4',
+                rota: '/detalhes',
                 icone: Icons.person_2_rounded,
                 cor: Colors.white),
           ],

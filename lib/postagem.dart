@@ -58,7 +58,7 @@ class CadastrarPublicacaoState extends State<CadastrarPublicacao> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Cadastro de Publicação",
+              "Faça sua Publicação",
               style: TextStyle(fontSize: 24),
             ),
             TextField(
