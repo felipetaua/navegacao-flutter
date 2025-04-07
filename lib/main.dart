@@ -4,10 +4,12 @@ import 'package:navegacao/Tela1.dart';
 import 'package:navegacao/Tela3.dart';
 import 'package:navegacao/Tela4.dart';
 import 'package:navegacao/detalhes.dart';
+import 'package:navegacao/postagem.dart';
 
 //Classe pai que configura todo nosso app herda tipo stateless
 class Aplicativo extends StatelessWidget {
   final List<Empresa> Empresas = [];
+  final List<Publicacao> Publicacoes = [];
   final String nomeUsuario;
   Aplicativo({required this.nomeUsuario});
 
@@ -21,7 +23,8 @@ class Aplicativo extends StatelessWidget {
       routes: {
         '/tela1': (context) =>
             Cadastro(Empresas: Empresas), // faz referencia a tela1
-        // '/tela2': (context) => TabelaPai(),
+        '/tela2': (context) =>
+            CadastrarPublicacao(publicacoes: Publicacoes), // Corrigido aqui
         '/tela3': (context) => Tela3(),
         '/tela4': (context) => Tela4(),
       },

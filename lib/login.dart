@@ -87,13 +87,6 @@ class LoginEstado extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FadeInImage(
-              placeholder: AssetImage('assets/icon/icone.png'),
-              image: AssetImage('assets/icon/app_icon.png'),
-              fadeInDuration: Duration(seconds: 3),
-              fadeOutDuration: Duration(seconds: 9),
-              width: 250,
-            ),
             Image.asset(
               'assets/icon/icone.png',
               width: 250,
