@@ -33,7 +33,7 @@ class Detalhes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Detalhes do contato"),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Center(
           child: Padding(
@@ -45,7 +45,7 @@ class Detalhes extends StatelessWidget {
             Icon(
               Icons.person,
               size: 100,
-              color: Colors.blue,
+              color: Colors.deepPurpleAccent,
             ),
             SizedBox(
               height: 20,

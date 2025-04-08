@@ -12,9 +12,9 @@ class Publicacao {
 }
 
 class CadastrarPublicacao extends StatefulWidget {
-  final List<Publicacao> publicacoes;
+  final String username;
 
-  CadastrarPublicacao({required this.publicacoes});
+  CadastrarPublicacao({required this.username});
 
   @override
   CadastrarPublicacaoState createState() => CadastrarPublicacaoState();
@@ -27,22 +27,25 @@ class CadastrarPublicacaoState extends State<CadastrarPublicacao> {
   String mensagem = '';
 
   Future<void> cadastrarPublicacao(Publicacao publicacao) async {
-    final url = Uri.parse(
-        "https://finan-4854e-default-rtdb.firebaseio.com/publicacao.json");
-    final resposta = await http.post(url,
-        body: jsonEncode({
-          "titulo": publicacao.titulo,
-          "descricao": publicacao.descricao,
-          "conteudo": publicacao.conteudo,
-        }));
+    if (publicacao.titulo.isNotEmpty && publicacao.descricao.isNotEmpty) {
+      final url = Uri.parse(
+          "https://finan-4854e-default-rtdb.firebaseio.com/publicacao.json");
+      final resposta = await http.post(url,
+          body: jsonEncode({
+            "titulo": publicacao.titulo,
+            "descricao": publicacao.descricao,
+            "conteudo": publicacao.conteudo,
+            "autor": widget.username
+          }));
 
-    setState(() {
-      if (resposta.statusCode == 200) {
-        mensagem = 'Publicação cadastrada com sucesso!';
-      } else {
-        mensagem = 'Erro ao cadastrar publicação.';
-      }
-    });
+      setState(() {
+        if (resposta.statusCode == 200) {
+          mensagem = 'Publicação cadastrada com sucesso!';
+        } else {
+          mensagem = 'Erro ao cadastrar publicação.';
+        }
+      });
+    }
   }
 
   @override
@@ -109,6 +112,38 @@ class CadastrarPublicacaoState extends State<CadastrarPublicacao> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class VerPublicacao extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Ver postagens! "),
+        backgroundColor: Colors.deepPurpleAccent,
+        foregroundColor: Colors.white,
+      ),
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+          future: null,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Erro ao carregar postagens!"),
+              );
+            }
+            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(
+                child: Text("Sem postagens para exibir"),
+              );
+            }
+          }),
     );
   }
 }

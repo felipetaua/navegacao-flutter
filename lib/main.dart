@@ -22,7 +22,7 @@ class Aplicativo extends StatelessWidget {
       routes: {
         '/tela1': (context) => Cadastro(Empresas: Empresas),
         '/tela2': (context) => TabelaPai(),
-        '/tela3': (context) => CadastrarPublicacao(publicacoes: Publicacoes),
+        '/tela3': (context) => CadastrarPublicacao(username: nomeUsuario),
         '/tela4': (context) => Empresas.isNotEmpty
             ? Detalhes(empresa: Empresas.first)
             : Scaffold(
