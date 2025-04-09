@@ -148,10 +148,28 @@ class VerPublicacao extends StatelessWidget {
             return ListView.builder(
                 itemCount: posts.length,
                 itemBuilder: (context, index) {
+                  final post = posts[index];
                   return Card(
                     elevation: 5,
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: Column(posts['imageUrl'] == ArgumentError.notNull()),
+                    child: Column(children: [
+                      post['imageUrl'] == null
+                          ? SizedBox()
+                          : Image.network(post['imagem']),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(post['titulo']),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(post['autor']),
+                          ],
+                        ),
+                      ),
+                    ]),
                   );
                 });
           }),
