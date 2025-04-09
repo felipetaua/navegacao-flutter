@@ -143,6 +143,17 @@ class VerPublicacao extends StatelessWidget {
                 child: Text("Sem postagens para exibir"),
               );
             }
+            //lista de post
+            final posts = snapshot.data!;
+            return ListView.builder(
+                itemCount: posts.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    elevation: 5,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Column(posts['imageUrl'] == ArgumentError.notNull()),
+                  );
+                });
           }),
     );
   }
