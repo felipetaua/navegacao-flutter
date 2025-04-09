@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:navegacao/main.dart';
@@ -78,9 +79,20 @@ class LoginEstado extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela de Login'),
-        backgroundColor: Colors.deepPurpleAccent,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(32),
+          ),
+          child: AppBar(
+            title: Text(
+              'Finan',
+              style: GoogleFonts.getFont('Aoboshi One'), 
+            ),
+            backgroundColor: Colors.deepPurpleAccent,
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(50.0),

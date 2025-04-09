@@ -117,6 +117,24 @@ class CadastrarPublicacaoState extends State<CadastrarPublicacao> {
 }
 
 class VerPublicacao extends StatelessWidget {
+  Future<List<Map<String, dynamic>>> buscarPublicacoes() async {
+    final url = Uri.parse(
+        'https://finan-4854e-default-rtdb.firebaseio.com/publicacao.json');
+    final resposta = await http.get(url);
+    final Map<String, dynamic> dados = jsonDecode(resposta.body);
+    //criando lista de objetos posts
+    final List<Map<String, dynamic>> posts = [];
+    dados.forEach((key, valor) {
+      posts.add({
+        'titulo': valor['titulo'],
+        'descricao': valor['descricao'],
+        'conteudo': valor['conteudo'],
+        'autor': valor['autor']
+      });
+    });
+    return posts;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
