@@ -83,7 +83,7 @@ class LoginEstado extends State<Login> {
         preferredSize: Size.fromHeight(60.0),
         child: ClipRRect(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(32),
+            bottom: Radius.circular(25),
           ),
           child: AppBar(
             title: Text(

@@ -71,10 +71,11 @@ class CadastrarPublicacaoState extends State<CadastrarPublicacao> {
             TextField(
               controller: descricaoControle,
               decoration: InputDecoration(labelText: 'Descrição'),
+              maxLines: 4,
             ),
             TextField(
               controller: conteudoControle,
-              decoration: InputDecoration(labelText: 'Conteúdo'),
+              decoration: InputDecoration(labelText: 'Imagem url'),
             ),
             SizedBox(
               height: 16,
@@ -139,58 +140,78 @@ class VerPublicacao extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ver postagens! "),
+        title: Text("Ver Postagens"),
         backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
-          future: null,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (snapshot.hasError) {
-              return Center(
-                child: Text("Erro ao carregar postagens!"),
-              );
-            }
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(
-                child: Text("Sem postagens para exibir"),
-              );
-            }
-            //lista de post
-            final posts = snapshot.data!;
-            return ListView.builder(
-                itemCount: posts.length,
-                itemBuilder: (context, index) {
-                  final post = posts[index];
-                  return Card(
-                    elevation: 5,
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: Column(children: [
-                      post['imageUrl'] == null
-                          ? SizedBox()
-                          : Image.network(post['imagem']),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(post['titulo']),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(post['autor']),
-                          ],
+        future: buscarPublicacoes(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("Erro ao carregar postagens!"),
+            );
+          }
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text("Sem postagens para exibir"),
+            );
+          }
+
+          // Lista de posts
+          final posts = snapshot.data!;
+          return ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return Card(
+                elevation: 5,
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        post['conteudo'] == null || post['conteudo'].isEmpty
+                            ? SizedBox()
+                            : Image.network(
+                                post['conteudo'],
+                                height: 400,
+                              ),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(post['titulo']),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(post['descricao']),
+                              Text(
+                                "Autor: ${post['autor'] ?? 'Autor Desconhecido'}",
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey[700]),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ]),
-                  );
-                });
-          }),
+                      ]),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

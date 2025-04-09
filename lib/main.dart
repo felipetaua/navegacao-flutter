@@ -23,20 +23,7 @@ class Aplicativo extends StatelessWidget {
         '/tela1': (context) => Cadastro(Empresas: Empresas),
         '/tela2': (context) => TabelaPai(),
         '/tela3': (context) => CadastrarPublicacao(username: nomeUsuario),
-        '/tela4': (context) => Empresas.isNotEmpty
-            ? Detalhes(empresa: Empresas.first)
-            : Scaffold(
-                appBar: AppBar(
-                  title: Text('Erro'),
-                  backgroundColor: Colors.red,
-                ),
-                body: Center(
-                  child: Text(
-                    'Nenhuma empresa disponível para exibir.',
-                    style: TextStyle(fontSize: 18, color: Colors.red),
-                  ),
-                ),
-              ),
+        '/tela4': (context) => VerPublicacao(),
       },
     );
   }
@@ -73,8 +60,8 @@ class Menu extends StatelessWidget {
                 icone: Icons.add,
                 cor: Colors.white),
             botao(
-                texto: 'Tela4',
-                rota: '/detalhes',
+                texto: 'Posts',
+                rota: '/tela4',
                 icone: Icons.person_2_rounded,
                 cor: Colors.white),
           ],
