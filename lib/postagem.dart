@@ -187,20 +187,35 @@ class VerPublicacao extends StatelessWidget {
                                 height: 400,
                               ),
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 60),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(post['titulo']),
+                              Text(post['titulo'],
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
                               SizedBox(
                                 height: 8,
                               ),
                               Text(post['descricao']),
-                              Text(
-                                "Autor: ${post['autor'] ?? 'Autor Desconhecido'}",
-                                style: TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    color: Colors.grey[700]),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.person_4_sharp,
+                                    color: Colors.deepPurpleAccent,
+                                  ),
+                                  Text(
+                                    "Autor: ${post['autor'] ?? 'Autor Desconhecido'}",
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.grey[700]),
+                                  )
+                                ],
                               )
                             ],
                           ),
